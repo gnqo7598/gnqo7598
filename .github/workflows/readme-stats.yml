@@ -1,0 +1,16 @@
+name: Update GitHub Stats
+
+on:
+  schedule:
+    - cron: "0 */12 * * *" # 12시간마다 실행
+  workflow_dispatch:       # 수동 실행도 가능
+
+jobs:
+  stats:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call github-readme-stats with PAT
+        run: |
+          curl -o /dev/null \
+            -H "Authorization: token ${{ secrets.PAT_STATS }}" \
+            "https://github-readme-stats.vercel.app/api?username=gnqo7598&count_private=true&include_all_commits=true&show_icons=true&theme=dark"
